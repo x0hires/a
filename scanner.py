@@ -154,6 +154,28 @@ MAP_REGIONS = {
     "AU": (70, 20),     # Австралия
 }
 
+COLORS = {
+    'BLACK': '\033[30m',
+    'RED': '\033[91m',       # Кроваво-красный
+    'GREEN': '\033[92m',     # Зеленый 
+    'YELLOW': '\033[93m',    # Желтый
+    'BLUE': '\033[94m',      # Синий
+    'MAGENTA': '\033[95m',   # Маджента
+    'CYAN': '\033[96m',      # Циан
+    'WHITE': '\033[97m',     # Белый
+    'ORANGE': '\033[38;5;208m', # Оранжевый
+    'DEDSEC': '\033[38;5;39m',  # Синий DedSec
+    'DEDSEC_GREEN': '\033[38;5;118m', # Зеленый DedSec
+    'CYBER': '\033[38;5;129m',  # Фиолетовый
+    'MATRIX': '\033[92m',    # Зеленый матрицы
+    'GLITCH': '\033[38;5;201m', # Розово-фиолетовый для глитч-эффектов
+    'HACKER': '\033[38;5;46m',  # Ярко-зеленый хакерский
+    'RESET': '\033[0m',
+    'BOLD': '\033[1m',
+    'UNDERLINE': '\033[4m',
+    'REVERSE': '\033[7m',
+}
+
 # Данные о фейковых атаках и их источниках для визуализации
 ATTACK_SOURCES = ["NA", "SA", "EU", "RU", "AF", "AS", "AU"]
 ATTACK_TYPES = [
@@ -198,28 +220,6 @@ DARKNET_SERVICES = [
     {"name": "DarkSearch", "address": "search7tdrcvri6.onion", "status": "online", "type": "Search"},
     {"name": "SecureDrop", "address": "secdropsxw2mw8c.onion", "status": "online", "type": "Whistleblowing"},
 ]
-
-COLORS = {
-    'BLACK': '\033[30m',
-    'RED': '\033[91m',       # Кроваво-красный
-    'GREEN': '\033[92m',     # Зеленый 
-    'YELLOW': '\033[93m',    # Желтый
-    'BLUE': '\033[94m',      # Синий
-    'MAGENTA': '\033[95m',   # Маджента
-    'CYAN': '\033[96m',      # Циан
-    'WHITE': '\033[97m',     # Белый
-    'ORANGE': '\033[38;5;208m', # Оранжевый
-    'DEDSEC': '\033[38;5;39m',  # Синий DedSec
-    'DEDSEC_GREEN': '\033[38;5;118m', # Зеленый DedSec
-    'CYBER': '\033[38;5;129m',  # Фиолетовый
-    'MATRIX': '\033[92m',    # Зеленый матрицы
-    'GLITCH': '\033[38;5;201m', # Розово-фиолетовый для глитч-эффектов
-    'HACKER': '\033[38;5;46m',  # Ярко-зеленый хакерский
-    'RESET': '\033[0m',
-    'BOLD': '\033[1m',
-    'UNDERLINE': '\033[4m',
-    'REVERSE': '\033[7m',
-}
 
 # Стили DedSec
 STYLES = {
