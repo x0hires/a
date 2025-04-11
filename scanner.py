@@ -1,109 +1,118 @@
 #!/usr/bin/env python3
+import os
 import sys
 import time
 import random
+import webbrowser
 from itertools import cycle
 
 # ===== КОНФИГ =====
-SYSTEM_NAME = "EVG" 
-MAIN_COLOR = '\033[91m'    # Кроваво-красный
-SECONDARY_COLOR = '\033[90m' # Тёмно-серый
-BG_COLOR = '\033[40m'      # Чёрный фон
+EVG_ART = [r"""
+ ███████╗██╗   ██╗ ██████╗ 
+ ██╔════╝██║   ██║██╔════╝ 
+ █████╗  ██║   ██║██║      
+ ██╔══╝  ╚██╗ ██╔╝██║      
+ ███████╗ ╚████╔╝ ╚██████╗ 
+ ╚══════╝  ╚═══╝   ╚═════╝""",
+ 
+r"""
+╔═╗╦  ╦╔═╗╔═╗
+║  ║  ║║ ║║╣ 
+╚═╝╩═╝╩╚═╝╚═╝""",
+
+r"""
+▄▄▄▄▄ ▄▄▄ ▄   ▄ ▄▄▄▄▄ ▄▄▄ 
+█ █ █ █▄▄  █ ▄ █ █ █ █ █▄▄  
+█ █ █ █▄▄▄ ██ ██ █ █ █ █▄▄▄ 
+▀ ▀ ▀ ▀▄▄▄ ▀   ▀ ▀ ▀ ▀ ▀▄▄▄"""]
+
+COLORS = {'RED':'\033[91m', 'CYAN':'\033[96m', 'GREEN':'\033[92m'}
 RESET = '\033[0m'
 
-EVG_LOGO = fr"""
-{MAIN_COLOR}
-    ▄▄▄▄▄ ▄▄▄ ▄   ▄ ▄▄▄▄▄ ▄▄▄ 
-    █ █ █ █▄▄  █ ▄ █ █ █ █ █▄▄  
-    █ █ █ █▄▄▄ ██ ██ █ █ █ █▄▄▄ 
-    ▀ ▀ ▀ ▀▄▄▄ ▀   ▀ ▀ ▀ ▀ ▀▄▄▄ 
-{RESET}
-"""
-
-def print_slow(text, delay=0.03):
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        time.sleep(delay)
+def print_rainbow(text):
+    colors = ['\033[91m', '\033[93m', '\033[92m', '\033[96m', '\033[94m', '\033[95m']
+    for i, char in enumerate(text):
+        print(f"{colors[i%6]}{char}{RESET}", end='', flush=True)
+        time.sleep(0.02)
     print()
 
-def glitch_text(text, intensity=3):
-    for _ in range(intensity):
-        print("\033[2J\033[H", end='')
-        glitched = ''.join([c if random.random() > 0.7 else random.choice('░▒▓█╬╫╋') for c in text])
-        print(f"{MAIN_COLOR}{glitched}{RESET}")
-        time.sleep(0.08)
-
-def matrix_grid(cycles=50):
-    chars = ['█','▓','▒','░','╬','╫']
+def matrix_invasion():
+    chars = 'EVGevg01█▓▒░'
     try:
-        width = 80
-        height = 20
+        for _ in range(100):
+            print(f"{COLORS['GREEN]}{''.join(random.choice(chars) for _ in range(120))}{RESET}")
+            time.sleep(0.03)
+    except: pass
+
+def animate_evg():
+    for art in EVG_ART:
         print("\033[2J\033[H", end='')
-        for _ in range(cycles):
-            grid = [[random.choice(chars) for _ in range(width)] for _ in range(height)]
-            for y, row in enumerate(grid):
-                print(f"\033[{y+2};1H{MAIN_COLOR}{''.join(row)}{RESET}")
+        for line in art.split('\n'):
+            print_rainbow(line)
             time.sleep(0.1)
-    except:
-        pass
-
-def hack_animation():
-    targets = [
-        ("[+] Взлом банковской системы", 3),
-        ("[✓] Доступ к камерам получен", 2),
-        ("[!] Обход брандмауэра...", 4),
-        ("[∆] Шифрование трафика", 3)
-    ]
-    
-    for text, speed in targets:
-        sys.stdout.write(f"\r{MAIN_COLOR}{text}{' ' * 20}{RESET}")
-        sys.stdout.flush()
-        for _ in range(10):
-            sys.stdout.write(f"{random.choice('░▒▓█')}")
-            sys.stdout.flush()
-            time.sleep(0.1 * speed)
-        print(f"\r{MAIN_COLOR}{text} [DONE]{RESET}")
-
-def fake_terminal():
-    commands = [
-        "sudo rm -rf / --no-preserve-root",
-        "dd if=/dev/zero of=/dev/sda",
-        "cat /dev/urandom > /dev/dsp",
-        ":(){ :|:& };:"
-    ]
-    
-    print(f"\n{SECONDARY_COLOR}root@dedsec-evgns:~#{RESET} ", end='')
-    for cmd in commands:
-        for char in cmd:
-            print(char, end='', flush=True)
-            time.sleep(0.05)
         time.sleep(0.5)
-        print(f"\n{MAIN_COLOR}⚠ ОШИБКА: Доступ запрещён!{RESET}")
-        print(f"{SECONDARY_COLOR}root@dedsec-evgns:~#{RESET} ", end='')
+
+def create_chaos():
+    os.makedirs("EVG_HAX", exist_ok=True)
+    for i in range(3):
+        with open(f"EVG_HAX/secret_{i}.txt", "w") as f:
+            f.write("EVG WAS HERE\n"*100)
+
+def fake_hack():
+    targets = cycle([
+        "Взлом пентагона...",
+        "Деактивация камер...",
+        "Кража биткоинов...",
+        "Взлом всех соцсетей..."
+    ])
+    
+    for _ in range(4):
+        target = next(targets)
+        sys.stdout.write(f"\r{COLORS['RED']}{target}")
+        sys.stdout.flush()
+        for __ in range(10):
+            sys.stdout.write(f" {random.choice('✓✗☠⚠⚡')}")
+            sys.stdout.flush()
+            time.sleep(0.2)
+        print()
+
+def surprise_ending():
+    webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    webbrowser.open("https://evg.su")
+    print("\n" + COLORS['CYAN'] + "Сюрприз в браузере! 😈" + RESET)
 
 def main():
-    # Инициализация терминала
-    print(f"{BG_COLOR}\033[2J\033[H{RESET}", end='')
+    print("\033[2J\033[H", end='')  # Очистка экрана
     
-    # Анимированный логотип
-    glitch_text(EVG_LOGO)
-    print(EVG_LOGO)
+    # Мега-анимация
+    animate_evg()
+    matrix_invasion()
+    
+    # Хакерский интерфейс
+    print_rainbow("\n=== АКТИВАЦИЯ СИСТЕМЫ EVG ===")
+    fake_hack()
+    
+    # Создание артефактов
+    print(COLORS['GREEN'] + "\nСоздание файлов взлома..." + RESET)
+    create_chaos()
+    
+    # Финальный аккорд
     time.sleep(1)
+    print("\n" + COLORS['RED'] + "✔ ВСЁ ВЗЛОМАНО!")
+    time.sleep(2)
     
-    # Эффект матрицы
-    matrix_grid(cycles=15)
+    # ASCII-маска
+    print(r"""
+    ╔═╗╔╗╔╔═╗╔╦╗
+    ║ ║║║║╠═╣║║║
+    ╚═╝╝╚╝╩ ╩╩ ╩
+    """)
     
-    # Анимация взлома
-    print_slow(f"\n{MAIN_COLOR}ИНИЦИАЛИЗАЦИЯ ВЗЛОМА...{RESET}")
-    hack_animation()
-    
-    # Фейковая терминальная сессия
-    fake_terminal()
-    
-    # Финал
-    print(f"\n\n{MAIN_COLOR}▣ {SYSTEM_NAME} ACTIVATED ▣")
-    print(f"{SECONDARY_COLOR}Все системы под контролем{RESET}\n")
+    # Сюрприз
+    surprise_ending(https://avatars.mds.yandex.net/i?id=9edd4e89971c26713a9175456d2f91f5_sr-4274912-images-thumbs&n=13)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n" + COLORS['RED'] + "HACK STOPPED!" + RESET)
