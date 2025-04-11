@@ -154,6 +154,9 @@ MAP_REGIONS = {
     "AU": (70, 20),     # Австралия
 }
 
+# Данные о фейковых атаках и их источниках для визуализации
+ATTACK_SOURCES = ["NA", "SA", "EU", "RU", "AF", "AS", "AU"]
+
 COLORS = {
     'BLACK': '\033[30m',
     'RED': '\033[91m',       # Кроваво-красный
@@ -176,8 +179,6 @@ COLORS = {
     'REVERSE': '\033[7m',
 }
 
-# Данные о фейковых атаках и их источниках для визуализации
-ATTACK_SOURCES = ["NA", "SA", "EU", "RU", "AF", "AS", "AU"]
 ATTACK_TYPES = [
     ("DDoS", COLORS['RED']),
     ("Bruteforce", COLORS['ORANGE']),
